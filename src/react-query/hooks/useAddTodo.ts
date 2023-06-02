@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 
 import { CACHE_KEY_TODOS } from "../constants";
-import { Todo } from "./useTodos";
-
+import { Todo, apiClient } from "./useTodos";
 interface AddTodoContext {
 	previousTodos: Todo[];
 }
@@ -12,11 +10,8 @@ const useAddTodo = (onAdd: () => void) => {
 	const queryClient = useQueryClient();
 
 	return useMutation<Todo, Error, Todo, AddTodoContext>({
-		mutationFn: (todo: Todo) =>
-			axios
-				.post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
-				.then((res) => res.data),
-
+		// mutationFn: (todo: Todo) => apiClient.post(todo),
+		mutationFn: apiClient.post,
 		// this callback will be called before mutation
 		// to implement optimistic update => onMutate callback should be called
 		// this callback will update query cache => UI gets updated right away
