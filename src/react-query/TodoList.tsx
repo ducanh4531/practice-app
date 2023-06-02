@@ -1,4 +1,4 @@
-import useTodos from "../hooks/useTodos";
+import useTodos from "./hooks/useTodos";
 
 const TodoList = () => {
 	const { data: todos, error, isLoading } = useTodos();
@@ -10,10 +10,7 @@ const TodoList = () => {
 	return (
 		<ul className="list-group">
 			{todos?.map((todo, index) => (
-				<li
-					key={`${index}${todo.id}`}
-					className="list-group-item"
-				>
+				<li key={`${index}${todo.id}`} className="list-group-item">
 					{todo.title}
 				</li>
 			))}

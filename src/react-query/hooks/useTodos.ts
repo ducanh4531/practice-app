@@ -1,5 +1,7 @@
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+import { CACHE_KEY_TODOS } from "../constants";
 
 export interface Todo {
 	id: number;
@@ -20,7 +22,7 @@ const useTodos = () => {
 		// 1st one identifies the type of data
 		// other values like 'completed' - for storing completed todo (string type)
 		// or {completed: true}(obj type)
-		queryKey: ["todos"], // => structure the cache
+		queryKey: CACHE_KEY_TODOS, // => structure the cache
 
 		// this func will be used to fetch data in backend
 		queryFn: fetchTodos,
