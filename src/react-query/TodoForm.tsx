@@ -4,14 +4,35 @@ import { useRef } from "react";
 
 import { Todo } from "../hooks/useTodos";
 
+interface AddTodoContext {
+	previousTodos: Todo[];
+}
+
 const TodoForm = () => {
 	const queryClient = useQueryClient();
 
-	const addTodo = useMutation<Todo, Error, Todo>({
+	const addTodo = useMutation<Todo, Error, Todo, AddTodoContext>({
 		mutationFn: (todo: Todo) =>
 			axios
 				.post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
 				.then((res) => res.data),
+
+		// this callback will be called before mutation
+		// to implement optimistic update => onMutate callback should be called
+		// this callback will update query cache => UI gets updated right away
+		onMutate: (newTodo) => {
+			const previousTodos =
+				queryClient.getQueryData<Todo[]>(["todos"]) || [];
+			queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
+				newTodo,
+				...(todos || []),
+			]);
+
+			// clear input field value
+			if (ref.current) ref.current.value = "";
+
+			return { previousTodos };
+		},
 
 		// func is called if everything goes well
 		onSuccess: (savedTodo, newTodo) => {
@@ -24,13 +45,20 @@ const TodoForm = () => {
 			// 2: updating the data in the cache
 			// need to use generic type argument to let react-query know what kind of data
 			// we want to update (posts/todos/etc.)
-			queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
-				savedTodo,
-				...(todos || []),
-			]);
+			queryClient.setQueryData<Todo[]>(["todos"], (todos) =>
+				todos?.map((todo) => (todo.id === 0 ? savedTodo : todo))
+			);
+			// [savedTodo, ...(todos || [])]
+			// );
 
 			// clear input field value
-			if (ref.current) ref.current.value = "";
+			// if (ref.current) ref.current.value = "";
+		},
+
+		onError(error, newTodo, context) {
+			if (!context) return;
+
+			return queryClient.setQueryData(["todos"], context.previousTodos);
 		},
 
 		// onError called if smth goes wrong and we can show smth like toast notification
@@ -52,7 +80,7 @@ const TodoForm = () => {
 					// mutate method will call mutationFn and pass todo obj as para
 					if (ref.current && ref.current.value)
 						addTodo.mutate({
-							id: 10,
+							id: 0,
 							title: ref.current?.value,
 							userId: 1,
 							completed: false,
