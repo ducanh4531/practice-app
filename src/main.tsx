@@ -19,7 +19,7 @@ const queryClient = new QueryClient({
 			cacheTime: 300_000,
 			// default after 5mins if query has no observers/components => query is inactive and removed from cache
 
-			staleTime: 10 * 1000,
+			staleTime: 10 * 1000, // fresh for 10 mins, after that it becomes stale
 			// default after 0, means as getting data => it is treated as old => refetch data from backend
 			// maybe this one will need to customize in projects, meanwhile, other settings no need to customize
 
@@ -28,7 +28,7 @@ const queryClient = new QueryClient({
 			refetchOnReconnect: false,
 			// note: react query also automatically refetch data under 3 situations:
 			// network reconnected, component mounted for 1st time, window refocused
-			// change default values to false
+			// change default values from true to false
 
 			// big note: if data is still stale => react query will attempt to fetch new data from backend
 			// while rerender components with stale data from cache => show data to users immediately
