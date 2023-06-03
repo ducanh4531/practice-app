@@ -22,7 +22,7 @@ const usePosts = (query: PostQuery) => {
 			: ["posts", query],
 
 		// the value returned in getNextPageParam will be passed as para in queryFn which fetched data from backend
-		queryFn: ({ pageParam }) =>
+		queryFn: ({ pageParam = 1 }) =>
 			// refactor http request by extracting to another module
 			postService.getAll({
 				params: {
