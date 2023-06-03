@@ -1,12 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-interface Post {
-	id: number;
-	title: string;
-	body: string;
-	userId: number;
-}
+import { useInfiniteQuery } from "@tanstack/react-query";
+// import axios from "axios";
+import postService, { Post } from "../services/postService";
 
 interface PostQuery {
 	page: number;
@@ -29,16 +23,27 @@ const usePosts = (query: PostQuery) => {
 
 		// the value returned in getNextPageParam will be passed as para in queryFn which fetched data from backend
 		queryFn: ({ pageParam }) =>
-			axios
-				.get<Post[]>("https://jsonplaceholder.typicode.com/posts", {
-					params: {
-						// _start: (query.page - 1) * query.pageSize,
-						_start: (pageParam - 1) * query.pageSize,
-						_limit: query.pageSize,
-						userId: query.userId,
-					},
-				})
-				.then((res) => res.data),
+			// refactor http request by extracting to another module
+			postService.getAll({
+				params: {
+					// _start: (query.page - 1) * query.pageSize,
+					_start: (pageParam - 1) * query.pageSize,
+					_limit: query.pageSize,
+					userId: query.userId,
+				},
+			}),
+
+		// axios
+		// 	.get<Post[]>("https://jsonplaceholder.typicode.com/posts", {
+		// 		params: {
+		// 			// _start: (query.page - 1) * query.pageSize,
+		// 			_start: (pageParam - 1) * query.pageSize,
+		// 			_limit: query.pageSize,
+		// 			userId: query.userId,
+		// 		},
+		// 	})
+		// 	.then((res) => res.data),
+
 		staleTime: 1 * 60 * 1000, // 1min => refetch data
 
 		// keep data on current page while waiting for the new data => so the page is not jumping (loading) up and down each time
