@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CACHE_KEY_TODOS } from "../constants";
-import { Todo, apiClient } from "./useTodos";
+import todoService, { Todo } from "../services/todoService";
 interface AddTodoContext {
 	previousTodos: Todo[];
 }
@@ -11,7 +11,7 @@ const useAddTodo = (onAdd: () => void) => {
 
 	return useMutation<Todo, Error, Todo, AddTodoContext>({
 		// mutationFn: (todo: Todo) => apiClient.post(todo),
-		mutationFn: apiClient.post,
+		mutationFn: todoService.post,
 		// this callback will be called before mutation
 		// to implement optimistic update => onMutate callback should be called
 		// this callback will update query cache => UI gets updated right away
