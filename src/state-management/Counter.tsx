@@ -1,25 +1,31 @@
-import { useState } from 'react';
+import { useReducer } from "react";
+import counterReducer from "./reducers/counterReducer";
 
 const Counter = () => {
-  const [value, setValue] = useState(0);
+	// use reducer, so state management logic is encapsulated inside reducer func
+	// => component is purely responsible for the markup, and doesn't have state management logic
+	// and can reuse the reducer in other components
 
-  return (
-    <div>
-      Counter ({value})
-      <button
-        onClick={() => setValue(value + 1)}
-        className="btn btn-primary mx-1"
-      >
-        Increment
-      </button>
-      <button
-        onClick={() => setValue(0)}
-        className="btn btn-primary mx-1"
-      >
-        Reset
-      </button>
-    </div>
-  );
+	// dispatch will trigger changes (dispatch means send an action)
+	const [value, dispatch] = useReducer(counterReducer, 0);
+
+	return (
+		<div>
+			Counter ({value})
+			<button
+				onClick={() => dispatch({ type: "INCREMENT" })}
+				className="btn btn-primary mx-1"
+			>
+				Increment
+			</button>
+			<button
+				onClick={() => dispatch({ type: "RESET" })}
+				className="btn btn-primary mx-1"
+			>
+				Reset
+			</button>
+		</div>
+	);
 };
 
 export default Counter;
