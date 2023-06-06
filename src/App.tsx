@@ -1,8 +1,10 @@
 import "./App.css";
+// import Counter from "./state-management/Counter";
+import TaskList from "./state-management/TaskList";
+
 // import TodoForm from "./react-query/TodoForm";
 // import TodoList from "./react-query/TodoList";
 // import PostList from "./react-query/PostList";
-import Counter from "./state-management/Counter";
 
 function App() {
 	return (
@@ -14,7 +16,8 @@ function App() {
 			{/* <PostList /> */}
 
 			{/* STATE-MANAGEMENT */}
-			<Counter />
+			{/* <Counter /> */}
+			<TaskList />
 		</>
 	);
 }
