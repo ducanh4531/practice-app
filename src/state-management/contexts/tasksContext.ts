@@ -1,6 +1,5 @@
-import { Dispatch } from "react";
+import React, { Dispatch } from "react";
 import { Task, TaskAction } from "../reducers/tasksReducer";
-import React from "react";
 
 // CREATE CONTEXT TYPE TO SHARE DATA THROUGH CHILDREN COMPONENTS
 interface TasksContextType {
