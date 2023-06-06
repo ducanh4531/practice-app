@@ -26,6 +26,7 @@ const TaskList = () => {
 						<span className="flex-grow-1">{task.title}</span>
 						<button
 							className="btn btn-outline-danger"
+							// REACT WILL DISPATCH THIS ACTION TO REDUCER TO GET A NEW STATE
 							onClick={() =>
 								dispatch({
 									type: "DELETE",
