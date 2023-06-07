@@ -14,6 +14,13 @@ import { TasksProvider } from "./state-management/tasks";
 function App() {
 	return (
 		// CAN SHARE VALUE TO OTHER COMPONENT USING USECONTEXT() HOOK THEN
+		// ----
+		// should only use React context for managing client (UI) state, (define local state + React context)
+		// use useState, useReducer for managing local state
+		// if have complex state management, logic and logic is spread all over the components
+		// => can centralize this state management logic using useReducer
+		// ----
+		// let react-query to manage server state
 		<AuthProvider>
 			<TasksProvider>
 				<h1>React Starter Project</h1>
