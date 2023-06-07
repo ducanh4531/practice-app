@@ -1,5 +1,4 @@
-import { useReducer } from "react";
-import counterReducer from "./counterReducer";
+import useCounterStore from "./store";
 
 const Counter = () => {
 	// use reducer, so state management logic is encapsulated inside reducer func
@@ -7,21 +6,20 @@ const Counter = () => {
 	// and can reuse the reducer in other components
 
 	// dispatch will trigger changes (dispatch means send an action)
-	const [value, dispatch] = useReducer(counterReducer, 0);
+
+	// ----
+	const { counter, increment, reset } = useCounterStore();
 
 	return (
 		<div>
-			Counter ({value})
+			Counter ({counter})
 			<button
-				onClick={() => dispatch({ type: "INCREMENT" })}
+				onClick={() => increment()}
 				className="btn btn-primary mx-1"
 			>
 				Increment
 			</button>
-			<button
-				onClick={() => dispatch({ type: "RESET" })}
-				className="btn btn-primary mx-1"
-			>
+			<button onClick={() => reset()} className="btn btn-primary mx-1">
 				Reset
 			</button>
 		</div>

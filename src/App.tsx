@@ -2,10 +2,10 @@ import "./App.css";
 // import LoginStatus from "./state-management/LoginStatus";
 // import TaskList from "./state-management/TaskList";
 import { AuthProvider } from "./state-management/auth";
-import HomePage from "./state-management/HomePage";
+// import HomePage from "./state-management/HomePage";
 import NavBar from "./state-management/NavBar";
+import Counter from "./state-management/counter/Counter";
 import { TasksProvider } from "./state-management/tasks";
-// import Counter from "./state-management/Counter";
 
 // import TodoForm from "./react-query/TodoForm";
 // import TodoList from "./react-query/TodoList";
@@ -30,10 +30,10 @@ function App() {
 				{/* <PostList /> */}
 
 				{/* STATE-MANAGEMENT */}
-				{/* <Counter /> */}
+				<Counter />
 				{/* <LoginStatus /> */}
 				<NavBar />
-				<HomePage />
+				{/* <HomePage /> */}
 			</TasksProvider>
 		</AuthProvider>
 	);
