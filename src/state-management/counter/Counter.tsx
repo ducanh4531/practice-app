@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import counterReducer from "./reducers/counterReducer";
+import counterReducer from "./counterReducer";
 
 const Counter = () => {
 	// use reducer, so state management logic is encapsulated inside reducer func

@@ -1,4 +1,4 @@
-import useAuth from "./hooks/useAuth";
+import useAuth from "./useAuth";
 
 const LoginStatus = () => {
 	// use custom hook => don't have to think about particular context

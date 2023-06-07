@@ -1,7 +1,7 @@
 import "./App.css";
 // import LoginStatus from "./state-management/LoginStatus";
 // import TaskList from "./state-management/TaskList";
-import AuthProvider from "./state-management/AuthProvider";
+import { AuthProvider } from "./state-management/auth";
 import HomePage from "./state-management/HomePage";
 import NavBar from "./state-management/NavBar";
 import { TasksProvider } from "./state-management/tasks";
