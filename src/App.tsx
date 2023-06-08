@@ -1,8 +1,7 @@
 import "./App.css";
 // import LoginStatus from "./state-management/LoginStatus";
 // import TaskList from "./state-management/TaskList";
-import { AuthProvider } from "./state-management/auth";
-// import HomePage from "./state-management/HomePage";
+import HomePage from "./state-management/HomePage";
 import NavBar from "./state-management/NavBar";
 import Counter from "./state-management/counter/Counter";
 import { TasksProvider } from "./state-management/tasks";
@@ -21,21 +20,19 @@ function App() {
 		// => can centralize this state management logic using useReducer
 		// ----
 		// let react-query to manage server state
-		<AuthProvider>
-			<TasksProvider>
-				<h1>React Starter Project</h1>
-				{/* REACT-QUERY */}
-				{/* <TodoForm /> */}
-				{/* <TodoList /> */}
-				{/* <PostList /> */}
+		<TasksProvider>
+			<h1>React Starter Project</h1>
+			{/* REACT-QUERY */}
+			{/* <TodoForm /> */}
+			{/* <TodoList /> */}
+			{/* <PostList /> */}
 
-				{/* STATE-MANAGEMENT */}
-				<Counter />
-				{/* <LoginStatus /> */}
-				<NavBar />
-				{/* <HomePage /> */}
-			</TasksProvider>
-		</AuthProvider>
+			{/* STATE-MANAGEMENT */}
+			<Counter />
+			{/* <LoginStatus /> */}
+			<NavBar />
+			<HomePage />
+		</TasksProvider>
 	);
 }
 
