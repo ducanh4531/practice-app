@@ -3,7 +3,11 @@ import useTasks from "./useTasks";
 
 const TaskList = () => {
 	const { tasks, dispatch } = useTasks();
-	const { user } = useAuthStore();
+
+	// use selector to prevent unnecessary renders
+	// this component is only dependent on user property
+	// and rerender only if this property changes
+	const user = useAuthStore((s) => s.user);
 
 	return (
 		<>
