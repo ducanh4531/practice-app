@@ -1,3 +1,4 @@
+import { mountStoreDevtool } from "simple-zustand-devtools";
 import { create } from "zustand";
 
 interface AuthStore {
@@ -11,5 +12,9 @@ const useAuthStore = create<AuthStore>((set) => ({
 	login: (username) => set(() => ({ user: username })),
 	logout: () => set(() => ({ user: "" })),
 }));
+
+if (process.env.NODE_ENV === "development") {
+	mountStoreDevtool("Auth Store", useAuthStore);
+}
 
 export default useAuthStore;
