@@ -1,13 +1,17 @@
-// import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const UserDetailPage = () => {
+type UserParams = {
+	id: string;
+};
+
+const UserDetail = () => {
 	// USE THREE HOOKS, CAN GET INFORMATION ABOUT THE CURRENT ROUTE
 	// PATHNAME, QUERY STRING PARAMETERS AND UPDATE QUERY STRING PARAMETERS
-	// const params = useParams();
+	const { id } = useParams<UserParams>();
 	// const location = useLocation();
 	// const [searchParams, setSearchParams] = useSearchParams();
 
-	return <p>User</p>;
+	return <p>User {id}</p>;
 };
 
-export default UserDetailPage;
+export default UserDetail;
