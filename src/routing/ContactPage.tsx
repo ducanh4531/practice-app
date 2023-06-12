@@ -8,6 +8,7 @@ const ContactPage = () => {
 			onSubmit={(event) => {
 				event.preventDefault();
 				// Redirect the user to the home page programmatically
+				// call navigate func only when it is inside event handlers, an effect
 				navigate("/");
 			}}
 		>
