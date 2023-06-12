@@ -4,11 +4,14 @@ import HomePage from "./HomePage";
 import Layout from "./Layout";
 import UserDetail from "./UserDetail";
 import UsersPage from "./UsersPage";
+import ErrorPage from "./ErrorPage";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Layout />,
+		errorElement: <ErrorPage />, // another benefit: anytime, app throws an error
+		// => react router catches it and render ErrorPage component
 		children: [
 			{ index: true, element: <HomePage /> }, // index: true | path: ''
 			{
